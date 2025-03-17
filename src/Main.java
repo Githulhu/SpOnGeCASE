@@ -31,21 +31,22 @@ public class Main {
     public static void main(String[] args) {
 
         JFrame window = new JFrame("SpOnGeCASE");
-        window.setSize(300,300);
+        window.setSize(450,600);
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         JPanel mainPanel = new JPanel();
-            mainPanel.setLayout(new GridLayout(4,1));
-
-        JPanel inputPanel = new JPanel();
-
-        JPanel outputPanel = new JPanel();
-
-        JTextArea inputText = new JTextArea("input");
+            mainPanel.setLayout(new GridLayout(2,1));
+        JTextArea inputText = new JTextArea();
         JButton sendButton = new JButton("Convert");
         JButton copyButton = new JButton("Copy");
-        JTextArea outputText = new JTextArea("output");
+        JTextArea outputText = new JTextArea();
             outputText.setEditable(false);
-
+            outputText.setBackground(Color.lightGray);
+        JPanel convertPanel = new JPanel(new BorderLayout());
+            convertPanel.add(inputText, BorderLayout.CENTER);
+            convertPanel.add(sendButton, BorderLayout.SOUTH);
+        JPanel copyPanel = new JPanel(new BorderLayout());
+            copyPanel.add(outputText, BorderLayout.CENTER);
+            copyPanel.add(copyButton, BorderLayout.SOUTH);
 
 
         sendButton.addActionListener(new ActionListener() {
@@ -64,11 +65,8 @@ public class Main {
             }
         });
 
-        mainPanel.add(inputText);
-        mainPanel.add(sendButton);
-        mainPanel.add(outputText);
-        mainPanel.add(copyButton);
-
+        mainPanel.add(convertPanel);
+        mainPanel.add(copyPanel);
 
         window.add(mainPanel);
         window.setVisible(true);
