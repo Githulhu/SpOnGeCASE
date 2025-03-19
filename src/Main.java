@@ -4,6 +4,8 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 public class Main {
 
@@ -42,8 +44,12 @@ public class Main {
             outputText.setEditable(false);
             outputText.setBackground(Color.lightGray);
         JPanel convertPanel = new JPanel(new BorderLayout());
+        JPanel upperButtonPanel = new JPanel(new GridLayout(1,2));
+        JButton clearButton = new JButton("Clear");
+            upperButtonPanel.add(clearButton);
+            upperButtonPanel.add(sendButton);
             convertPanel.add(inputText, BorderLayout.CENTER);
-            convertPanel.add(sendButton, BorderLayout.SOUTH);
+            convertPanel.add(upperButtonPanel, BorderLayout.SOUTH);
         JPanel copyPanel = new JPanel(new BorderLayout());
             copyPanel.add(outputText, BorderLayout.CENTER);
             copyPanel.add(copyButton, BorderLayout.SOUTH);
@@ -65,9 +71,17 @@ public class Main {
             }
         });
 
+        clearButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                inputText.setText("");
+                inputText.requestFocus();
+            }
+        });
+
         mainPanel.add(convertPanel);
         mainPanel.add(copyPanel);
-
+        inputText.requestFocus();
         window.add(mainPanel);
         window.setVisible(true);
 
